@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import MapView from "../app/MapView";
-import Log from "../../js/logger.js";
+//import Log from "../../js/logger.js";
 
 interface MainPageProps {
   height: string;

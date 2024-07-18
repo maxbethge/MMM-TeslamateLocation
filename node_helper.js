@@ -15,10 +15,10 @@ module.exports = NodeHelper.create({
   },
 
   log: function (...args) {
-    if (node_helper_config.logging) {
+    //if (node_helper_config.logging) {
       //console.log(args);
       Log.log('[MMM-TeslamateLocation] ' + JSON.stringify(args));
-    }
+    //}
   },
 
   formatDateTime: function (secs) {
