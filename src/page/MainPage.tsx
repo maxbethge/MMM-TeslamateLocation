@@ -98,6 +98,7 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
   },
 
   notificationReceived: function (notification, payload, sender) {
+    console.log(this.name + " - " + notification + " - " payload + " - " + sender);
     if (notification === "DOM_OBJECTS_CREATED") {
       this.createMap();
     }
