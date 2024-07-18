@@ -10,18 +10,18 @@
   "author": "Peter Donker",
   "license": "MIT",
   "dependencies": {
-    "leaflet": "^1.7.1",
-    "mqtt": "^4.2.8",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-leaflet": "^3.2.2"
+    "leaflet": "^1.9.4",
+    "mqtt": "^4.3.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
     "@types/leaflet": "^1.7.6",
     "@types/magicmirror-module": "^2.16.1",
     "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "@types/webpack": "^5.28.0",
     "process": "^0.11.10",
     "ts-loader": "^9.2.6",

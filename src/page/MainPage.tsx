@@ -38,6 +38,7 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
         " at port " +
         this.config.mqttServerPort
     );
+    this.Log.log('['+ this.name + '] ' + "Setting up connection to MQTT Broker " +  this.config.mqttServerAddress + " at port " + this.config.mqttServerPort);
     this.sendSocketNotification("MQTT_CONFIG", this.config);
   },
 
@@ -79,6 +80,7 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
         " JSON: " +
         payload.value
     );
+    
     if (notification === "MQTT_PAYLOAD") {
       if (payload != null) {
         const value = parseFloat(payload.value);

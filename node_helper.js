@@ -1,10 +1,12 @@
 const mqtt = require("mqtt");
 const NodeHelper = require("node_helper");
+const Log = require("../../js/logger.js");
 var node_helper_config;
 
 module.exports = NodeHelper.create({
   start: function () {
-    console.log(this.name + ": Starting node helper");
+    //console.log(this.name + ": Starting node helper");
+    Log.log('['+ this.name + '] ' + " Starting node helper");
     this.loaded = false;
   },
 
@@ -14,7 +16,8 @@ module.exports = NodeHelper.create({
 
   log: function (...args) {
     if (node_helper_config.logging) {
-      console.log(args);
+      //console.log(args);
+      Log.log('['+ this.name + '] ' + JSON.stringify(args));
     }
   },
 
@@ -43,11 +46,11 @@ module.exports = NodeHelper.create({
 
   startClient: function (config) {
     node_helper_config = config;
-
-    console.log(
-      this.name + ": Starting client for: ",
-      config.mqttServerAddress
-    );
+    Log.log('['+ this.name + '] ' + "Starting client for: ", config.mqttServerAddress);
+    //console.log(
+    //  this.name + ": Starting client for: ",
+    //  config.mqttServerAddress
+    //);
 
     var self = this;
 
@@ -75,30 +78,37 @@ module.exports = NodeHelper.create({
     if (server.port) {
       mqttServer = mqttServer + ":" + server.port;
     }
-    console.log(self.name + ": Connecting to " + mqttServer);
+    //console.log(self.name + ": Connecting to " + mqttServer);
+    Log.log('['+ self.name + '] ' + "Connecting to " + mqttServer);
 
     server.client = mqtt.connect(mqttServer, server.options);
 
     server.client.on("error", function (err) {
-      console.log(self.name + " " + server.serverKey + ": Error: " + err);
+      //console.log(self.name + " " + server.serverKey + ": Error: " + err);
+      Log.log('['+ self.name + '] ' + server.serverKey + ": Error: " + err);
     });
 
     server.client.on("reconnect", function (err) {
       server.value = "reconnecting"; // Hmmm...
-      console.log(self.name + ": " + server.serverKey + " reconnecting");
+      //console.log(self.name + ": " + server.serverKey + " reconnecting");
+      Log.log('['+ self.name + '] ' + server.serverKey + " reconnecting");
     });
 
     server.client.on("connect", function (connack) {
-      console.log(self.name + " connected to " + mqttServer);
-      console.log(self.name + ": subscribing to " + server.topics);
+      //console.log(self.name + " connected to " + mqttServer);
+      //console.log(self.name + ": subscribing to " + server.topics);
+      Log.log('['+ self.name + '] ' + "connected to " + mqttServer);
+      Log.log('['+ self.name + '] ' + "subscribing to " + server.topics);
       server.client.subscribe(server.topics);
     });
 
     server.client.on("message", function (topic, payload) {
-      self.log(self.name + " " + topic, payload.toString());
+      //self.log(self.name + " " + topic, payload.toString());
+      Log.log('['+ self.name + '] ' + topic, payload.toString());
       var now = Date.now();
       var nowStr = self.formatDateTime(now / 1000);
-      self.log(self.name, topic, now, nowStr);
+      //self.log(self.name, topic, now, nowStr);
+      Log.log('['+ self.name + '] ' + topic + ", " + now + ", " + nowStr);
       self.sendSocketNotification("MQTT_PAYLOAD", {
         serverKey: server.serverKey,
         topic: topic,
@@ -111,13 +121,13 @@ module.exports = NodeHelper.create({
 
   socketNotificationReceived: function (notification, payload) {
     var self = this;
-    console.log(
-      self.name + " Notification received: " + notification + " " + payload
-    );
+    Log.log('['+ self.name + '] ' + "Notification received: " + notification + " " + payload);
+    //console.log(self.name + " Notification received: " + notification + " " + payload);
 
     if (notification === "MQTT_CONFIG") {
       var config = payload;
-      console.log(self.name + " MQTT_CONFIG: " + config);
+      //console.log(self.name + " MQTT_CONFIG: " + config);
+      Log.log('['+ self.name + '] ' + "MQTT_CONFIG: " + JSON.stringify(config));
       self.startClient(config);
       self.loaded = true;
     }
