@@ -17,7 +17,7 @@ module.exports = NodeHelper.create({
   log: function (...args) {
     if (node_helper_config.logging) {
       //console.log(args);
-      Log.log('['+ this.name + '] ' + JSON.stringify(args));
+      Log.log('[MMM-TeslamateLocation] ' + JSON.stringify(args));
     }
   },
 
@@ -46,7 +46,8 @@ module.exports = NodeHelper.create({
 
   startClient: function (config) {
     node_helper_config = config;
-    Log.log('['+ this.name + '] ' + "Starting client for: ", config.mqttServerAddress);
+    this.log("Starting client for: " + config.mqttServerAddress);
+    //Log.log('['+ this.name + '] ' + "Starting client for: ", config.mqttServerAddress);
     //console.log(
     //  this.name + ": Starting client for: ",
     //  config.mqttServerAddress
