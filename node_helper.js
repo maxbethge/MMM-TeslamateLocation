@@ -5,7 +5,6 @@ var node_helper_config;
 
 module.exports = NodeHelper.create({
   start: function () {
-    //console.log(this.name + ": Starting node helper");
     this.log("Starting node helper");
     this.loaded = false;
   },
@@ -16,18 +15,17 @@ module.exports = NodeHelper.create({
 
   log: function (...args) {
     //if (node_helper_config.logging) {
-      //console.log(args);
       Log.log('['+ this.name + '] ' + args);
     //}
   },
 
   formatDateTime: function (secs) {
-    this.log("Secs", secs);
+    //this.log("Secs", secs);
     var epoch = new Date(0);
     epoch.setSeconds(parseInt(secs));
-    this.log("Epoch", epoch);
+    //this.log("Epoch", epoch);
     var date = epoch.toISOString();
-    this.log("date", date);
+    //this.log("date", date);
     this.log(
       "toLocaleTime",
       epoch.toLocaleTimeString(node_helper_config.localeStr)
@@ -47,11 +45,6 @@ module.exports = NodeHelper.create({
   startClient: function (config) {
     node_helper_config = config;
     this.log("Starting client for: " + config.mqttServerAddress);
-    //Log.log('['+ this.name + '] ' + "Starting client for: ", config.mqttServerAddress);
-    //console.log(
-    //  this.name + ": Starting client for: ",
-    //  config.mqttServerAddress
-    //);
 
     var self = this;
 
@@ -79,46 +72,30 @@ module.exports = NodeHelper.create({
     if (server.port) {
       mqttServer = mqttServer + ":" + server.port;
     }
-    //console.log(self.name + ": Connecting to " + mqttServer);
-    Log.log('['+ self.name + '] ' + "Connecting to " + mqttServer);
+    this.log("Connecting to " + mqttServer);
 
     server.client = mqtt.connect(mqttServer, server.options);
 
     server.client.on("error", function (err) {
-      //console.log(self.name + " " + server.serverKey + ": Error: " + err);
-      //Log.log('['+ self.name + '] ' + server.serverKey + ": Error: " + err);
-      this.log(server.serverKey,"Error: " + err)
+      self.log(server.serverKey,"Error: " + err)
     });
 
     server.client.on("reconnect", function (err) {
       server.value = "reconnecting"; // Hmmm...
-      //console.log(self.name + ": " + server.serverKey + " reconnecting");
-      //Log.log('['+ self.name + '] ' + server.serverKey + " reconnecting");
-      this.log(server.serverKey + " reconnecting")
+      self.log(server.serverKey + " reconnecting")
     });
 
     server.client.on("connect", function (connack) {
-      //console.log(self.name + " connected to " + mqttServer);
-      //console.log(self.name + ": subscribing to " + server.topics);
-      //Log.log('['+ self.name + '] ' + "connected to " + mqttServer);
-      //Log.log('['+ self.name + '] ' + "subscribing to " + server.topics);
-      //self.log("subscribing to " , server.topics);
-      //self.log("subscribing to " + server.topics);
       self.log("connected to " + mqttServer);
       self.log("subscribing to " + server.topics);
-
       server.client.subscribe(server.topics);
     });
 
     server.client.on("message", function (topic, payload) {
-      //self.log(self.name + " " + topic, payload.toString());
-      //Log.log('['+ self.name + '] ' + topic, payload.toString());
       self.log(topic, payload.toString());
       var now = Date.now();
       var nowStr = self.formatDateTime(now / 1000);
-      //self.log(self.name, topic, now, nowStr);
-      //Log.log('['+ self.name + '] ' + topic + ", " + now + ", " + nowStr);
-      self.log(topic,now,nowStr);
+      //self.log(topic,now,nowStr);
       self.sendSocketNotification("MQTT_PAYLOAD", {
         serverKey: server.serverKey,
         topic: topic,
@@ -131,15 +108,11 @@ module.exports = NodeHelper.create({
 
   socketNotificationReceived: function (notification, payload) {
     var self = this;
-    //Log.log('['+ self.name + '] ' + "Notification received: " + notification + " " + payload);
     this.log("Notification received: " ,notification , JSON.stringify(payload));
-    //console.log(self.name + " Notification received: " + notification + " " + payload);
 
     if (notification === "MQTT_CONFIG") {
       var config = payload;
-      //console.log(self.name + " MQTT_CONFIG: " + config);
-      //Log.log('['+ self.name + '] ' + "MQTT_CONFIG: " + JSON.stringify(config));
-      this.log("MQTT_CONFIG: " ,JSON.stringify(config))
+      //this.log("MQTT_CONFIG: " ,JSON.stringify(config))
       self.startClient(config);
       self.loaded = true;
     }

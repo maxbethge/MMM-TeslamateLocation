@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import MapView from "../app/MapView";
-//import Log from "../../js/logger.js";
 
 interface MainPageProps {
   height: string;
@@ -39,9 +38,6 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
         " at port " +
         this.config.mqttServerPort
     );
-    this.log("1Setting up connection to MQTT Broker " +  this.config.mqttServerAddress + " at port " + this.config.mqttServerPort);
-    //Log.log('[MMM-TeslamateLocation] ' + "1Setting up connection to MQTT Broker " +  this.config.mqttServerAddress + " at port " + this.config.mqttServerPort);
-    //this.Log.log('[MMM-TeslamateLocation] ' + "2Setting up connection to MQTT Broker " +  this.config.mqttServerAddress + " at port " + this.config.mqttServerPort);
     this.sendSocketNotification("MQTT_CONFIG", this.config);
   },
 
