@@ -113,12 +113,12 @@ module.exports = NodeHelper.create({
     server.client.on("message", function (topic, payload) {
       //self.log(self.name + " " + topic, payload.toString());
       //Log.log('['+ self.name + '] ' + topic, payload.toString());
-      this.log(topic, payload.toString());
+      self.log(topic, payload.toString());
       var now = Date.now();
       var nowStr = self.formatDateTime(now / 1000);
       //self.log(self.name, topic, now, nowStr);
       //Log.log('['+ self.name + '] ' + topic + ", " + now + ", " + nowStr);
-      this.log(topic,now,nowStr);
+      self.log(topic,now,nowStr);
       self.sendSocketNotification("MQTT_PAYLOAD", {
         serverKey: server.serverKey,
         topic: topic,
@@ -132,7 +132,7 @@ module.exports = NodeHelper.create({
   socketNotificationReceived: function (notification, payload) {
     var self = this;
     //Log.log('['+ self.name + '] ' + "Notification received: " + notification + " " + payload);
-    this.log("Notification received: " ,notification , payload)
+    this.log("Notification received: " ,notification , payload.toString());
     //console.log(self.name + " Notification received: " + notification + " " + payload);
 
     if (notification === "MQTT_CONFIG") {
