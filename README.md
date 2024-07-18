@@ -12,7 +12,7 @@ and shows it on a [Leaflet](https://leafletjs.com/) map.
 Go to `MagicMirror/modules` and write
 
 ```
-    git clone https://github.com/donker/MMM-TeslamateLocation
+    git clone https://github.com/maxbethge/MMM-TeslamateLocation
     cd MMM-TeslamateLocation
     npm install
 ```
