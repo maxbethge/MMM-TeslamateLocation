@@ -100,8 +100,8 @@ module.exports = NodeHelper.create({
       //console.log(self.name + ": subscribing to " + server.topics);
       Log.log('['+ self.name + '] ' + "connected to " + mqttServer);
       Log.log('['+ self.name + '] ' + "subscribing to " + server.topics);
-      log("subscribing to " , server.topics);
-      log("subscribing to " + server.topics);
+      self.log("subscribing to " , server.topics);
+      self.log("subscribing to " + server.topics);
       server.client.subscribe(server.topics);
     });
 
