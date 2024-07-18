@@ -6,11 +6,11 @@ import {
   useMap
 } from "react-leaflet";
 
-const ChangeMapView: React.FC<{ coords: { lat: number; lng: number } }> = ({
+const ChangeMapView2: React.FC<{ coords: { lat: number; lng: number } }> = ({
   coords
 }) => {
   const map = useMap();
-  console.log("ChangeMapView", coords, map.getZoom());
+  console.log("ChangeMapView2", coords, map.getZoom());
   map.setView([coords.lat, coords.lng], map.getZoom());
 
   return null;
@@ -25,18 +25,18 @@ interface IMapProps {
   tileUrl: string;
 }
 
-const Map: React.FC<IMapProps> = (props) => {
+const Map2: React.FC<IMapProps> = (props) => {
   return (
     <LeafletMap
       center={props.center}
       zoom={props.zoom}
       style={{ width: "100%", height: "100%" }}
     >
-      <ChangeMapView coords={props.center} />
+      <ChangeMapView2 coords={props.center} />
       <TileLayer attribution="" url={props.tileUrl} />
       <LeafletMarker position={props.center} draggable={false}></LeafletMarker>
     </LeafletMap>
   );
 };
 
-export default Map;
+export default Map2;

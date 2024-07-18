@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import MapView from "../app/MapView";
+import MapView2 from "../app/MapView2";
 
 interface MainPageProps {
   height: string;
@@ -14,7 +14,7 @@ interface MainPageProps {
   tileUrl: string;
 }
 
-Module.register<MainPageProps>("MMM-TeslamateLocation", {
+Module.register<MainPageProps>("MMM-TeslamateLocation2", {
   defaults: {
     height: "300px",
     width: "100%",
@@ -23,7 +23,7 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
     mqttServerPort: 1883,
     mqttServerUser: "",
     mqttServerPassword: "",
-    mqttTopic: "teslamate/cars/1/+",
+    mqttTopic: "teslamate/cars/2/+",
     tileUrl: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   },
 
@@ -38,18 +38,18 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
         " at port " +
         this.config.mqttServerPort
     );
-    this.sendSocketNotification("MQTT_CONFIG", this.config);
+    this.sendSocketNotification("MQTT_CONFIG2", this.config);
   },
 
   getDom: function () {
     const container = document.createElement("div");
-    container.classList.add("mmm-teslamatelocation-app");
+    container.classList.add("mmm-teslamatelocation2-app");
     return container;
   },
 
   createMap: function () {
     const mainDivs = document.getElementsByClassName(
-      "mmm-teslamatelocation-app"
+      "mmm-teslamatelocation2-app"
     );
     if (mainDivs.length > 0) {
       const sub = document.createElement("div");
@@ -57,7 +57,7 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
       sub.style.height = this.config.height;
       mainDivs[0].appendChild(sub);
       ReactDOM.render(
-        <MapView
+        <MapView2
           zoomLevel={this.config.zoomLevel}
           tileUrl={this.config.tileUrl}
         />,
@@ -79,18 +79,17 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
         " JSON: " +
         payload.value
     );
-    
-    if (notification === "MQTT_PAYLOAD") {
+    if (notification === "MQTT_PAYLOAD2") {
       if (payload != null) {
         const value = parseFloat(payload.value);
         if (payload.topic.endsWith("latitude")) {
-          if ((window as any).setLatitude) {
-            (window as any).setLatitude(value);
+          if ((window as any).setLatitude2) {
+            (window as any).setLatitude2(value);
           }
         }
         if (payload.topic.endsWith("longitude")) {
-          if ((window as any).setLongitude) {
-            (window as any).setLongitude(value);
+          if ((window as any).setLongitude2) {
+            (window as any).setLongitude2(value);
           }
         }
       }
@@ -104,6 +103,6 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
   },
 
   getStyles: function () {
-    return [this.file("leaflet.css")];
+    return [this.file("leaflet2.css")];
   }
 });

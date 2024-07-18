@@ -1,5 +1,5 @@
 import { Component, createRef, useRef } from "react";
-import Map from "./Map";
+import Map2 from "./Map2";
 
 interface IMapViewProps {
   zoomLevel: number;
@@ -13,7 +13,7 @@ interface IMapViewState {
   };
 }
 
-export default class MapView extends Component<IMapViewProps, IMapViewState> {
+export default class MapView2 extends Component<IMapViewProps, IMapViewState> {
   constructor(props: IMapViewProps) {
     super(props);
     this.state = {
@@ -22,12 +22,12 @@ export default class MapView extends Component<IMapViewProps, IMapViewState> {
         lng: 0
       }
     };
-    (window as any).setLatitude = (val: number) => {
-      console.log("setLatitude", val);
+    (window as any).setLatitude2 = (val: number) => {
+      console.log("MapView2.setLatitude2", val);
       this.setState({ center: { lat: val, lng: this.state.center.lng } });
     };
-    (window as any).setLongitude = (val: number) => {
-      console.log("setLongitude", val);
+    (window as any).setLongitude2 = (val: number) => {
+      console.log("MapView2.setLongitude2", val);
       this.setState({ center: { lat: this.state.center.lat, lng: val } });
     };
   }
@@ -41,9 +41,9 @@ export default class MapView extends Component<IMapViewProps, IMapViewState> {
   }
 
   public render(): JSX.Element {
-    console.log("MapView.render", this.state);
+    console.log("MapView2.render", this.state);
     return (
-      <Map
+      <Map2
         center={this.state.center}
         zoom={this.props.zoomLevel}
         tileUrl={this.props.tileUrl}

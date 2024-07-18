@@ -96,7 +96,7 @@ module.exports = NodeHelper.create({
       var now = Date.now();
       var nowStr = self.formatDateTime(now / 1000);
       //self.log(topic,now,nowStr);
-      self.sendSocketNotification("MQTT_PAYLOAD", {
+      self.sendSocketNotification("MQTT_PAYLOAD2", {
         serverKey: server.serverKey,
         topic: topic,
         value: payload.toString(),
@@ -110,9 +110,9 @@ module.exports = NodeHelper.create({
     var self = this;
     this.log("Notification received: " ,notification , JSON.stringify(payload));
 
-    if (notification === "MQTT_CONFIG") {
+    if (notification === "MQTT_CONFIG2") {
       var config = payload;
-      //this.log("MQTT_CONFIG: " ,JSON.stringify(config))
+      //this.log("MQTT_CONFIG2: " ,JSON.stringify(config))
       self.startClient(config);
       self.loaded = true;
     }

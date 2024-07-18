@@ -5,7 +5,7 @@ const path = require("path");
 module.exports = {
   mode: "none",
   entry: {
-    app: path.join(__dirname, "src/page/MainPage.tsx")
+    app: path.join(__dirname, "src/page/MainPage2.tsx")
   },
   target: "web",
   resolve: {
@@ -24,7 +24,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: "MMM-TeslamateLocation.js",
+    filename: "MMM-TeslamateLocation2.js",
     path: path.resolve(__dirname)
   },
   plugins: [

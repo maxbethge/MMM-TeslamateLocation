@@ -1,5 +1,5 @@
 {
-  "name": "mmm-teslamatelocation",
+  "name": "mmm-teslamatelocation2",
   "version": "1.0.0",
   "description": "Show your Tesla's location based on the data received from Teslamate",
   "main": "index.js",
