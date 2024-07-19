@@ -13354,8 +13354,13 @@
             appRef: null,
             start: function () {
                 console.log(this.name + ": tl Setting up connection to MQTT Broker " + this.config.mqttServerAddress + " at port " + this.config.mqttServerPort),
-                //console.log(this.name + ": 2before sending a payload "),
-                //console.log(this.name + ": 3after sending a payload "),
+                console.log(this.name + ": 2before getDom "),
+                this.getDom(),
+                console.log(this.name + ": 3before createMap "),
+                this.createMap(),
+                console.log(this.name + ": 4before setLatitude "),
+                window.setLatitude && window.setLatitude(0),
+                console.log(this.name + ": 5before sendSocketNotification "),
                 this.sendSocketNotification("MQTT_CONFIG", this.config)
             },
             getDom: function () {
