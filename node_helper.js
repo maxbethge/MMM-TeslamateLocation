@@ -118,7 +118,8 @@ module.exports = NodeHelper.create({
       self.log("connected to " + mqttServer);
       self.log("subscribing to " + server.topics);
       console.log('['+ this.name + '] subscribing to ' + server.topics);
-      server.client.subscribe(server.topics);
+      setTimeout(() => { server.client.subscribe(server.topics); }, 10000);
+      
     });
 
   },
