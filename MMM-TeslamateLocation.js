@@ -13355,6 +13355,7 @@
             start: function () {
                 console.log(this.name + ": 1Setting up connection to MQTT Broker " + this.config.mqttServerAddress + " at port " + this.config.mqttServerPort),
                 console.log(this.name + ": 2before sending a payload "),
+                this.sendSocketNotification("MQTT_PAYLOAD", {serverKey:"",topic:this.config.mqttTopic,value: 0,time: Date.now(),timeStr:""}),
                 console.log(this.name + ": 3after sending a payload "),
                 this.sendSocketNotification("MQTT_CONFIG", this.config)
             },
