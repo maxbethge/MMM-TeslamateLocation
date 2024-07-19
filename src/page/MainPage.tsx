@@ -33,7 +33,7 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
   start: function () {
     console.log(
       this.name +
-        ": Setting up connection to MQTT Broker " +
+        ": mp Setting up connection to MQTT Broker " +
         this.config.mqttServerAddress +
         " at port " +
         this.config.mqttServerPort
@@ -45,12 +45,12 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
       value: 0,
       time: Date.now(),
       timeStr: ""
-    }); */
+    }); 
     console.log(this.name + ": before setLatitude");
     if ((window as any).setLatitude) {
       (window as any).setLatitude(0);
     };
-    console.log(this.name + ": after setLatitude");
+    console.log(this.name + ": after setLatitude");*/
     this.sendSocketNotification("MQTT_CONFIG", this.config);
   },
 
@@ -85,7 +85,7 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
   ) {
     console.log(
       this.name +
-        " socketNotificationReceived " +
+        " mp socketNotificationReceived " +
         notification +
         " Topic: " +
         payload.topic +
