@@ -13357,11 +13357,13 @@
                 this.sendSocketNotification("MQTT_CONFIG", this.config)
             },
             getDom: function () {
+                console.log(this.name + " tl getDom");
                 var t = document.createElement("div");
                 return t.classList.add("mmm-teslamatelocation-app"),
                 t
             },
             createMap: function () {
+                console.log(this.name + " tl createMap");
                 var n = document.getElementsByClassName("mmm-teslamatelocation-app");
                 if (n.length > 0) {
                     var i = document.createElement("div");
@@ -13382,6 +13384,7 @@
                 }
             },
             notificationReceived: function (t, e, n) {
+                console.log(this.name + " tl notificationReceived"),
                 "DOM_OBJECTS_CREATED" === t && this.createMap()
             },
             getStyles: function () {
