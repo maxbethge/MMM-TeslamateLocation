@@ -86,7 +86,7 @@ module.exports = NodeHelper.create({
     });
 
     server.client.on("message", function (topic, payload) {
-      self.log(topic, payload.toString());
+      self.log("message",topic, payload.toString());
       var now = Date.now();
       var nowStr = self.formatDateTime(now / 1000);
       //self.log(topic,now,nowStr);
