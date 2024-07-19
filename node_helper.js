@@ -102,10 +102,8 @@ module.exports = NodeHelper.create({
     server.client.on("connect", function (connack) {
       self.log("connected to " + mqttServer);
       self.log("subscribing to " + server.topics);
-      console.log('['+ this.name + '] subscribing to ' + server.topics);
       setTimeout(() => { server.client.subscribe(server.topics); }, 10000);      
     });
-
   },
 
   socketNotificationReceived: function (notification, payload) {
