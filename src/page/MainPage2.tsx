@@ -33,7 +33,7 @@ Module.register<MainPageProps>("MMM-TeslamateLocation2", {
   start: function () {
     console.log(
       this.name +
-        ": Setting up connection to MQTT Broker " +
+        ": mp Setting up connection to MQTT Broker " +
         this.config.mqttServerAddress +
         " at port " +
         this.config.mqttServerPort
@@ -72,7 +72,7 @@ Module.register<MainPageProps>("MMM-TeslamateLocation2", {
   ) {
     console.log(
       this.name +
-        " socketNotificationReceived " +
+        " mp socketNotificationReceived " +
         notification +
         " Topic: " +
         payload.topic +
