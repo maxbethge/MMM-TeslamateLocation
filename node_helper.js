@@ -6,7 +6,6 @@ var node_helper_config;
 module.exports = NodeHelper.create({
   start: function () {
     this.log("Starting node helper");
-    console.log('['+ this.name + '] Starting node helper');
     this.loaded = false;
   },
 
@@ -46,7 +45,6 @@ module.exports = NodeHelper.create({
   startClient: function (config) {
     node_helper_config = config;
     this.log("Starting client for: " + config.mqttServerAddress);
-    console.log('['+ this.name + '] Starting client for: ' + config.mqttServerAddress);
 
     var self = this;
 
@@ -75,7 +73,6 @@ module.exports = NodeHelper.create({
       mqttServer = mqttServer + ":" + server.port;
     }
     this.log("Connecting to " + mqttServer);
-    console.log('['+ this.name + '] Connecting to ' + mqttServer);
 
     server.client = mqtt.connect(mqttServer, server.options);
 
@@ -114,7 +111,6 @@ module.exports = NodeHelper.create({
   socketNotificationReceived: function (notification, payload) {
     var self = this;
     this.log("Notification received: " ,notification , JSON.stringify(payload));
-    console.log('['+ this.name + '] Notification received: ' ,notification , JSON.stringify(payload));
 
     if (notification === "MQTT_CONFIG") {
       var config = payload;
