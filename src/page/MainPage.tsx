@@ -38,14 +38,19 @@ Module.register<MainPageProps>("MMM-TeslamateLocation", {
         " at port " +
         this.config.mqttServerPort
     );
-    /* initialize map */
+    /* initialize map
     this.sendSocketNotification("MQTT_PAYLOAD", {
       serverKey: "",
       topic: this.config.mqttTopic,
       value: 0,
       time: Date.now(),
       timeStr: ""
-    });
+    }); */
+    console.log(this.name + ": before setLatitude");
+    if ((window as any).setLatitude) {
+      (window as any).setLatitude(0);
+    };
+    console.log(this.name + ": after setLatitude");
     this.sendSocketNotification("MQTT_CONFIG", this.config);
   },
 
