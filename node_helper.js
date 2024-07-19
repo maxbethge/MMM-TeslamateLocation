@@ -110,9 +110,9 @@ module.exports = NodeHelper.create({
     });
 
     self.log("before this.sendSocketNotification");
-    this.sendSocketNotification("MQTT_PAYLOAD",{serverKey:"",topic:this.config.mqttTopic,value: 0,time: Date.now(),timeStr:""});
+    this.sendSocketNotification("MQTT_PAYLOAD",{serverKey:"",topic:server.topics[0],value: 0,time: Date.now(),timeStr:""});
     self.log("before self.sendSocketNotification");
-    self.sendSocketNotification("MQTT_PAYLOAD",{serverKey:"",topic:this.config.mqttTopic,value: 0,time: Date.now(),timeStr:""});
+    self.sendSocketNotification("MQTT_PAYLOAD",{serverKey:"",server.topics[0],value: 0,time: Date.now(),timeStr:""});
 
     server.client.on("connect", function (connack) {
       self.log("connected to " + mqttServer);
