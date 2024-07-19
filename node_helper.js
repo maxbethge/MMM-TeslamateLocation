@@ -87,14 +87,7 @@ module.exports = NodeHelper.create({
       server.value = "reconnecting"; // Hmmm...
       self.log(server.serverKey + " reconnecting")
     });
-/*
-    server.client.on("connect", function (connack) {
-      self.log("connected to " + mqttServer);
-      self.log("subscribing to " + server.topics);
-      console.log('['+ this.name + '] subscribing to ' + server.topics);
-      server.client.subscribe(server.topics);
-    });
-*/
+
     server.client.on("message", function (topic, payload) {
       self.log("message",topic, payload.toString());
       var now = Date.now();
@@ -108,11 +101,6 @@ module.exports = NodeHelper.create({
         timeStr: nowStr
       });
     });
-
-    self.log("before this.sendSocketNotification");
-    this.sendSocketNotification("MQTT_PAYLOAD",{serverKey:"",topic:server.topics[0],value: 0,time: Date.now(),timeStr:""});
-    self.log("before self.sendSocketNotification");
-    self.sendSocketNotification("MQTT_PAYLOAD",{serverKey:"",topic:server.topics[0],value: 0,time: Date.now(),timeStr:""});
 
     server.client.on("connect", function (connack) {
       self.log("connected to " + mqttServer);
